@@ -2,7 +2,21 @@
 
 
 #############comands
-cmds=(" help install makeSrc ")
+dfCmds=(
+  "adb"
+  "node"
+  "npx"
+  "yarn"
+  "react-native"
+)
+
+dfErrorCmds=(
+  "set path SDK/platform_tools to environment system"
+  "install nodejs"
+  "install nodejs"
+  "install yarn"
+  "npm i -g react-native-cli"
+)
 #############comands
 
 #############folders
@@ -23,20 +37,57 @@ folders=(
   )
 #############folders
 
+#############def
+userCmd=()
+#############def
+
 
 helpMe(){
-	echo -e "\e[38;2;0;150;150m\n help\t\t\t\e[38;2;150;150;150m-h|-help"
-  echo -e "\e[38;2;0;150;150m makeSrc\t\t\t\e[38;2;150;150;150m-m mode (mini, \e[38;2;20;150;20mfull\e[38;2;150;150;150m)"
-  echo -e "\e[38;2;0;150;150m install\t\t\e[38;2;150;150;150m-h|-help"
+	echo -e "\n \e[38;2;250;50;250mh\e[38;2;0;150;150melp, -h, --help"
+
+  echo -e " \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src "
+
+  echo -e " \e[38;2;250;50;250mc\e[38;2;0;150;150mheck\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255mequire\e[38;2;150;150;150m check requirements react-native"
+
+  echo -e " \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact\e[38;2;150;150;150m install react-native project with custom template\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template"
 }
 
 runCmd(){
-  case $1 in
-    help)
+  local tmp=("$@")
+
+  case ${tmp[0]} in
+    help|h)
       helpMe
     ;;
 
-    makeSrc)
+    make|m)
+    makeCommands ${tmp[1]}
+    ;;
+
+    check|c)
+    checkCommands ${tmp[1]}
+    ;;
+
+    install|i)
+    tmp=(${tmp[@]:1:3})
+    installCommands "${tmp[@]}"
+    ;;
+    
+    *)
+    errorCmd
+    ;;
+
+  esac 
+}
+
+makeCommands(){
+  local result
+
+  IFS=':' read -ra result <<< "$1"
+
+  case ${result[0]} in
+    src)
+  
       mkDirSrcReact
 
       if [ "$userType" = "full" ]; then
@@ -45,15 +96,68 @@ runCmd(){
         createFilesReact
       fi
     ;;
+    *)
+    errorCmd
+    ;;
+  esac
 
+}
+
+checkCommands(){
+  case $1 in
+    require)
+      checkDfCmd
+    ;;
+    *)
+      checkDfCmd
+    ;;
+
+  esac
+}
+
+installCommands(){
+  local tmp=("$@")
+
+  case ${tmp[0]} in
+  react|r)
+    installReactCommands "${tmp[1]}"
+  ;;
+
+  *)
+  helpMe
+  ;;
   esac 
 }
 
+installReactCommands(){
+  local v
+
+   [[ -z "$userVersion" ]] && v="0.64.2" || v=$userVersion
+
+  # npx react-native init $1 --version $v
+
+  if [ "$userType" != 0 ]; then
+
+    mkDirSrcReact "./$1"
+
+    createFilesReact $1
+
+  fi
+
+}
+
+errorCmd(){
+  echo -e "\e[38;2;150;0;0m error not found Command"
+  exit 1
+}
+
 mkDirSrcReact(){
+  local tmpOutput=$1
+
   if [ -n "$userOutput" ]; then
     tmpOutput=$userOutput
   else
-    tmpOutput="."
+    [[ -n "$1" ]] && tmpOutput=$1 || tmpOutput="."
   fi
 
   for i in "${folders[@]}"
@@ -67,10 +171,12 @@ mkDirSrcReact(){
 }
 
 createFilesReact(){
+  local tmpOutput
+
   if [ -n "$userOutput" ]; then
     tmpOutput="$userOutput/src"
   else
-    tmpOutput="./src"
+    [[ -n "$1" ]] && tmpOutput="./$1/src" || tmpOutput="./src"
   fi
 
   echo -e "const Config = {\n\turlSiteBase: 'http://%SITE%/',\n\turlSite: 'http://%SITE%/backend/public/api/',\n\turlSiteStorage: 'http://%SITE%/backend/public/storage/',\n\tdefaultLanguage: 'fa',\n};\n\n\n/**\n *\n * @param {String} url @example home search\n * @param {Array} path @example url:home={0}&id={1}&exit={0} {\"yes\",1} =>home=yes&id=1&exit=yes\n * @param {'api'|'storage'|'base'} type @example add /api/ to url\n */\n\nexport const getUrl = (url, path, type = 'api') => {\nlet str =(type == 'api'\n? Config.urlSite\n: type == 'base'\n? Config.urlSiteBase\n: Config.urlSiteStorage) + url;\n\n
@@ -91,11 +197,58 @@ createFilesReact(){
   unset tmpOutput
 }
 
+checkDfCmd(){
+  local i=0
+  for ((i=0; i<${#dfCmds[@]}; i++)); do
+    local cmd=${dfCmds[i]}
+
+    if ! command -v $cmd &> /dev/null
+    then
+        echoColorCheck 0 $cmd "${dfErrorCmds[i]}"
+      else
+        echoColorCheck 1 $cmd
+    fi
+  done
+  # for cmd in "${dfCmds[@]}"
+  # do
+  #   if ! command -v $cmd &> /dev/null
+  #   then
+  #       echoColorCheck 0 $cmd
+  #     else
+  #       echoColorCheck 1 $cmd
+  #   fi
+  # done
+
+  echo -e "\n"
+
+  if [ ! -d "$JAVA_HOME" ]
+  then
+        echoColorCheck 0 "JAVA_HOME" "set path JDK 1.8 to environment system"
+      else
+        echoColorCheck 1 "JAVA_HOME"
+  fi
+
+  if [ ! -d "$ANDROID_HOME" ]
+  then
+        echoColorCheck 0 "ANDROID_HOME" "set path SDK to environment system"
+      else
+        echoColorCheck 1 "ANDROID_HOME"
+  fi
+}
+
+echoColorCheck(){
+  if [ "$1" == 1 ] 
+  then
+        echo -e "\e[38;2;0;150;0m $2 ✔"
+      else
+        echo -e "\e[38;2;150;0;0m $2 ❌ \e[38;2;255;200;15m =>\t$3"
+  fi
+}
     
 while test $# -gt 0; do
   case "$1" in
     -h|--help)
-      helpMe
+      helpMe ${userCmd[0]}
       exit 0
       ;;
     
@@ -116,16 +269,17 @@ while test $# -gt 0; do
       userType=$1
       shift
       ;;
+      
+    -nt)
+      shift
+      userType=0
+      shift
+      ;;
     *)
-      if [[ "${cmds[*]}" =~ " ${1} " ]]; then
-          userCmd=$1
-      else
-          helpMe
-          exit 0
-      fi
+      userCmd+=("$1")
       shift
       ;;
   esac
 done
 
-runCmd $userCmd
+runCmd "${userCmd[@]}"
