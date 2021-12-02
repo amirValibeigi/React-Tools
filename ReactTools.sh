@@ -43,13 +43,17 @@ userCmd=()
 
 
 helpMe(){
+  echo -e "\n \e[38;2;250;50;250mb\e[38;2;0;150;150muild\n\t \e[38;2;250;50;250md\e[38;2;255;255;255mebug\e[38;2;150;150;150m build debug apk without sign keykey\n\t\t\e[38;2;255;200;15m ReactTools b|ReactTools b d\n\t \e[38;2;250;50;250mr\e[38;2;50;255;50melease\e[38;2;150;150;150m build release apk wit sign key\n\t\t\e[38;2;255;200;15m ReactTools b r"
+
+  echo -e "\n \e[38;2;250;50;250mc\e[38;2;0;150;150mheck\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255mequire\e[38;2;150;150;150m check requirements react-native\n\t\t\e[38;2;255;200;15m ReactTools c r"
+
 	echo -e "\n \e[38;2;250;50;250mh\e[38;2;0;150;150melp, -h, --help"
 
-  echo -e " \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src "
+  echo -e "\n \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact {NAME_PROJECT}\e[38;2;150;150;150m install react-native project with custom template\n\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template\n\t\t\e[38;2;255;200;15m ReactTools i r TestReactTools"
 
-  echo -e " \e[38;2;250;50;250mc\e[38;2;0;150;150mheck\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255mequire\e[38;2;150;150;150m check requirements react-native"
+  echo -e "\n \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src\n\t\t\e[38;2;255;200;15m ReactTools m s -o newProject"
 
-  echo -e " \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact\e[38;2;150;150;150m install react-native project with custom template\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template"
+  echo -e "\n \e[38;2;250;50;250ms\e[38;2;0;150;150mtart\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb\e[38;2;150;150;150m connect to device \e[38;2;50;255;50mdef=usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;50;255;50musb\e[38;2;150;150;150m connect to device with usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:wifi {ADDRESS:PORT}\e[38;2;150;150;150m connect to device with wifi\n\t\t\e[38;2;255;200;15m ReactTools s a:wifi 192.168.1.101\n\t \e[38;2;250;50;250ms\e[38;2;50;255;50merver\e[38;2;150;150;150m start server react-native\n\t\t\e[38;2;255;200;15m ReactTools s s| ReactTools s"
 }
 
 runCmd(){
@@ -61,20 +65,29 @@ runCmd(){
     ;;
 
     make|m)
-    makeCommands ${tmp[1]}
+      makeCommands ${tmp[1]}
     ;;
 
     check|c)
-    checkCommands ${tmp[1]}
+      checkCommands ${tmp[1]}
     ;;
 
     install|i)
-    tmp=(${tmp[@]:1:3})
-    installCommands "${tmp[@]}"
+      tmp=(${tmp[@]:1:3})
+      installCommands "${tmp[@]}"
+    ;;
+
+    start|s)
+      tmp=(${tmp[@]:1:3})
+      startCommands "${tmp[@]}"
+    ;;
+    
+    build|b)
+      buildCommands ${tmp[1]}
     ;;
     
     *)
-    errorCmd
+      errorCmd
     ;;
 
   esac 
@@ -97,7 +110,7 @@ makeCommands(){
       fi
     ;;
     *)
-    errorCmd
+      errorCmd
     ;;
   esac
 
@@ -105,13 +118,9 @@ makeCommands(){
 
 checkCommands(){
   case $1 in
-    require)
+    *|require)
       checkDfCmd
     ;;
-    *)
-      checkDfCmd
-    ;;
-
   esac
 }
 
@@ -119,22 +128,65 @@ installCommands(){
   local tmp=("$@")
 
   case ${tmp[0]} in
-  react|r)
-    installReactCommands "${tmp[1]}"
-  ;;
+    react|r)
+      installReactCommands "${tmp[1]}"
+    ;;
 
-  *)
-  helpMe
-  ;;
+    *)
+      helpMe
+    ;;
   esac 
+}
+
+startCommands(){
+  local tmp=("$@")
+  local result
+  
+  IFS=':' read -ra result <<< "${tmp[0]}"
+
+  case ${result[0]} in
+    adb|a)
+      
+      echoColorCheck 2 "connect ..."
+
+      if [ "${result[1]}" = "wifi" ];then
+        adb connect ${tmp[1]}
+      else
+        adb usb
+      fi
+
+      adb reverse tcp:8081 tcp:8081
+
+      echoColorCheck 1 "reverse"
+
+    ;;
+
+    *|server|s)
+      npx react-native start
+    ;;
+
+  esac
+
+}
+
+buildCommands(){
+  case $1 in
+    release|r)
+      npx react-native run-android --variant=release
+    ;;
+
+    *|debug|d)
+      npx react-native run-android
+    ;;
+  esac
 }
 
 installReactCommands(){
   local v
 
-   [[ -z "$userVersion" ]] && v="0.64.2" || v=$userVersion
+  [[ -z "$userVersion" ]] && v="0.64.2" || v=$userVersion
 
-  # npx react-native init $1 --version $v
+  npx react-native init $1 --version $v
 
   if [ "$userType" != 0 ]; then
 
@@ -209,15 +261,6 @@ checkDfCmd(){
         echoColorCheck 1 $cmd
     fi
   done
-  # for cmd in "${dfCmds[@]}"
-  # do
-  #   if ! command -v $cmd &> /dev/null
-  #   then
-  #       echoColorCheck 0 $cmd
-  #     else
-  #       echoColorCheck 1 $cmd
-  #   fi
-  # done
 
   echo -e "\n"
 
@@ -237,11 +280,12 @@ checkDfCmd(){
 }
 
 echoColorCheck(){
-  if [ "$1" == 1 ] 
-  then
-        echo -e "\e[38;2;0;150;0m $2 ✔"
-      else
-        echo -e "\e[38;2;150;0;0m $2 ❌ \e[38;2;255;200;15m =>\t$3"
+  if [ "$1" == 1 ]; then
+      echo -e "\e[38;2;0;150;0m $2 ✔"
+  elif [ "$1" == 2 ]; then
+      echo -e "\e[38;2;55;225;225m $2 🔃"
+  else
+      echo -e "\e[38;2;150;0;0m $2 ❌ \e[38;2;255;200;15m =>\t$3"
   fi
 }
     
