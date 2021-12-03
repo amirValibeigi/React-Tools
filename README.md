@@ -1,5 +1,25 @@
 # React-Tools
 
+tools for react native
+
+## using
+
+you can use full or short commands, such as:
+
+release apk
+
+```bash
+ReactTools build release
+```
+
+or
+
+```bash
+ReactTools b r
+```
+
+---
+
 ## build
 
 - debug - build debug apk without sign key
@@ -35,7 +55,27 @@ ReactTools c r
   **-nt** create without custom template
 
 ```bash
-  ReactTools i r TestReactTools -v 0.65.0
+ReactTools i r TestReactTools -v 0.65.0
+```
+
+- app **{FOLDER}/{NAME_APK}** - install apk on all devices
+
+  **-o=android/app/build/outputs/apk** path apk
+
+```bash
+ReactTools i a debug/app-x86_64-release.apk
+```
+
+- app debug - install app-debug.apk on all devices
+
+```bash
+ReactTools i a
+```
+
+- app release - install app-release.apk on all devices
+
+```bash
+ReactTools i a r
 ```
 
 ## make
@@ -45,7 +85,7 @@ ReactTools c r
   **-o** path make src
 
 ```bash
-  ReactTools m s
+ReactTools m s
 ```
 
 ## start

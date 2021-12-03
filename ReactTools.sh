@@ -49,7 +49,7 @@ helpMe(){
 
 	echo -e "\n \e[38;2;250;50;250mh\e[38;2;0;150;150melp, -h, --help"
 
-  echo -e "\n \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact {NAME_PROJECT}\e[38;2;150;150;150m install react-native project with custom template\n\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template\n\t\t\e[38;2;255;200;15m ReactTools i r TestReactTools"
+  echo -e "\n \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact {NAME_PROJECT}\e[38;2;150;150;150m install react-native project with custom template\n\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template\n\t\t\e[38;2;255;200;15m ReactTools i r TestReactTools\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp {FOLDER}/{NAME_APK}\e[38;2;150;150;150m install apk on all devices\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m=\e[38;2;50;255;50mandroid/app/build/outputs/apk\n\t\t\e[38;2;255;200;15m ReactTools i a debug/app-x86_64-release.apk\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250md\e[38;2;50;255;50mebug\e[38;2;150;150;150m install app-debug.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250mr\e[38;2;255;255;255melease\e[38;2;150;150;150m install app-release.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a r"
 
   echo -e "\n \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src\n\t\t\e[38;2;255;200;15m ReactTools m s -o newProject"
 
@@ -132,6 +132,10 @@ installCommands(){
       installReactCommands "${tmp[1]}"
     ;;
 
+    app|a)
+      installAppCommands "${tmp[1]}"
+    ;;
+
     *)
       helpMe
     ;;
@@ -196,6 +200,44 @@ installReactCommands(){
 
   fi
 
+}
+
+installAppCommands(){
+  local nameApk
+  local dir
+
+  if [[ "$userOutput" == "" ]]; then
+    dir="./android/app/build/outputs/apk"
+  else
+    dir=$userOutput
+  fi
+
+  case $1 in
+    release|r)
+      nameApk="release/app-release.apk"
+    ;;
+
+    debug|d)
+      nameApk="debug/app-debug.apk"
+    ;;
+    *)
+      if [[ "$1" == "" ]]; then
+        nameApk="debug/app-debug.apk"
+      elif [[ "$1" =~ ".apk" ]]; then
+        nameApk="$1"
+      else
+        nameApk="$1.apk"
+      fi
+    ;;
+  esac
+
+  local devices=$(adb devices | tail -n +2 | cut -sf 1)
+
+  echoColorCheck 2 "install $dir/$nameApk on All Devices 🔽\n$devices"
+
+  echo -e "\e[38;2;255;255;255m\n install..."
+
+  adb devices | tail -n +2 | cut -sf 1 | xargs -iX adb -s X install -r -g $nameApk
 }
 
 errorCmd(){
