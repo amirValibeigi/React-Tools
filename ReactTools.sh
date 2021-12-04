@@ -49,11 +49,11 @@ helpMe(){
 
 	echo -e "\n \e[38;2;250;50;250mh\e[38;2;0;150;150melp, -h, --help"
 
-  echo -e "\n \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact {NAME_PROJECT}\e[38;2;150;150;150m install react-native project with custom template\n\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template\n\t\t\e[38;2;255;200;15m ReactTools i r TestReactTools\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp {FOLDER}/{NAME_APK}\e[38;2;150;150;150m install apk on all devices\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m=\e[38;2;50;255;50mandroid/app/build/outputs/apk\n\t\t\e[38;2;255;200;15m ReactTools i a debug/app-x86_64-release.apk\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250md\e[38;2;50;255;50mebug\e[38;2;150;150;150m install app-debug.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250mr\e[38;2;255;255;255melease\e[38;2;150;150;150m install app-release.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a r"
+  echo -e "\n \e[38;2;250;50;250mi\e[38;2;0;150;150mnstall\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact {NAME_PROJECT}\e[38;2;150;150;150m install react-native project with custom template\n\t\t\e[38;2;255;255;255m-v\e[38;2;150;150;150m=\e[38;2;50;255;50m0.64.2\e[38;2;150;150;150m version react|\e[38;2;255;255;255m-nt\e[38;2;150;150;150m create without custom template\n\t\t\e[38;2;255;200;15m ReactTools i r TestReactTools\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp {FOLDER}/{NAME_APK}\e[38;2;150;150;150m install apk on all devices\n\t\t\e[38;2;255;255;255m-p\e[38;2;150;150;150m=\e[38;2;50;255;50mandroid/app/build/outputs/apk\n\t\t\e[38;2;255;200;15m ReactTools i a debug/app-x86_64-release.apk\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250md\e[38;2;50;255;50mebug\e[38;2;150;150;150m install app-debug.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mpp \e[38;2;250;50;250mr\e[38;2;255;255;255melease\e[38;2;150;150;150m install app-release.apk on all devices\n\t\t\e[38;2;255;200;15m ReactTools i a r"
 
   echo -e "\n \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src\n\t\t\e[38;2;255;200;15m ReactTools m s -o newProject"
 
-  echo -e "\n \e[38;2;250;50;250ms\e[38;2;0;150;150mtart\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb\e[38;2;150;150;150m connect to device \e[38;2;50;255;50mdef=usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;50;255;50musb\e[38;2;150;150;150m connect to device with usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:wifi {ADDRESS:PORT}\e[38;2;150;150;150m connect to device with wifi\n\t\t\e[38;2;255;200;15m ReactTools s a:wifi 192.168.1.101\n\t \e[38;2;250;50;250ms\e[38;2;50;255;50merver\e[38;2;150;150;150m start server react-native\n\t\t\e[38;2;255;200;15m ReactTools s s| ReactTools s"
+  echo -e "\n \e[38;2;250;50;250ms\e[38;2;0;150;150mtart\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb\e[38;2;150;150;150m connect to device \e[38;2;50;255;50mdef=usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mc\e[38;2;255;255;255mlear {PACKAGE_NAME}\e[38;2;150;150;150m clear and run app\n\t\t\e[38;2;255;255;255m-p\e[38;2;150;150;150m path folder project\n\t\t\e[38;2;255;200;15m ReactTools s a:c| ReactTools s a:c com.example.test\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mu\e[38;2;50;255;50msb\e[38;2;150;150;150m connect to device with usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mw\e[38;2;255;255;255mifi {ADDRESS:PORT}\e[38;2;150;150;150m connect to device with wifi\n\t\t\e[38;2;255;200;15m ReactTools s a:wifi 192.168.1.101\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250ml\e[38;2;255;255;255mink\e[38;2;150;150;150m link library\n\t\t\e[38;2;255;200;15m ReactTools s r:l\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250mo\e[38;2;255;255;255mpen\e[38;2;250;50;250mD\e[38;2;255;255;255meveloper\e[38;2;150;150;150m open react developer dialog\n\t\t\e[38;2;255;200;15m ReactTools s r:od\n\t \e[38;2;250;50;250ms\e[38;2;50;255;50merver\e[38;2;150;150;150m start server react-native\n\t\t\e[38;2;255;200;15m ReactTools s s| ReactTools s"
 }
 
 runCmd(){
@@ -150,18 +150,51 @@ startCommands(){
 
   case ${result[0]} in
     adb|a)
-      
-      echoColorCheck 2 "connect ..."
+      case ${result[1]} in
+        clear|c)
+          startAdbClearCommands "${tmp[1]}"
+        ;;
 
-      if [ "${result[1]}" = "wifi" ];then
-        adb connect ${tmp[1]}
-      else
-        adb usb
-      fi
+        wifi|w)
+          echoColorCheck 2 "connect ..."
+          adb connect ${tmp[1]}
 
-      adb reverse tcp:8081 tcp:8081
+          adb reverse tcp:8081 tcp:8081
 
-      echoColorCheck 1 "reverse"
+          echoColorCheck 1 "reverse"
+        ;;
+
+        *|usb|u)
+          echoColorCheck 2 "connect ..."
+          adb usb
+
+          adb reverse tcp:8081 tcp:8081
+
+          echoColorCheck 1 "reverse"
+        
+        ;;
+
+      esac
+
+    ;;
+
+    react|r)
+      case ${result[1]} in
+        link|l)
+          echoColorCheck 2 "linking ..."
+          npx react-native link
+          echoColorCheck 1 "linked"
+        ;;
+        
+        openDeveloper|openDev|od|oD)
+          adb shell input keyevent 82
+          echoColorCheck 1 "open react developer"
+        ;;
+
+        *)
+          errorCmd
+
+      esac
 
     ;;
 
@@ -171,6 +204,38 @@ startCommands(){
 
   esac
 
+}
+
+startAdbClearCommands(){
+
+        local path="android/app/src/main/AndroidManifest.xml"
+        local package="$1"
+
+        if [[ "$userPath" != "" ]]; then
+
+          path="$userPath/$path"
+
+        fi
+
+
+        if [ -f "$path" ]; then
+
+          [[ "$package" == "" ]] && package=$(head $path | egrep -oh 'package=\"[_.A-Za-z\.0-9]*"'  | cut -f 2 -d "\"")
+          
+          echoColorCheck 2 "clear app: $package  ..."
+
+          adb shell pm clear $package
+
+          echoColorCheck 1 "cleard"
+          
+          echoColorCheck 2 "run app: $package/.MainActivity  ..."
+          
+          adb shell am start -n $package/.MainActivity
+          
+          echoColorCheck 1 "runnig"
+        else
+          echoColorCheck 0 "not found $path" "set -o path"
+        fi
 }
 
 buildCommands(){
@@ -206,10 +271,10 @@ installAppCommands(){
   local nameApk
   local dir
 
-  if [[ "$userOutput" == "" ]]; then
+  if [[ "$userPath" == "" ]]; then
     dir="./android/app/build/outputs/apk"
   else
-    dir=$userOutput
+    dir=$userPath
   fi
 
   case $1 in
@@ -347,6 +412,12 @@ while test $# -gt 0; do
     -o|--output)
       shift
       userOutput=$1
+      shift
+      ;;
+
+    -p|--path)
+      shift
+      userPath=$1
       shift
       ;;
       

@@ -60,7 +60,7 @@ ReactTools i r TestReactTools -v 0.65.0
 
 - app **{FOLDER}/{NAME_APK}** - install apk on all devices
 
-  **-o=android/app/build/outputs/apk** path apk
+  **-p=android/app/build/outputs/apk** path apk
 
 ```bash
 ReactTools i a debug/app-x86_64-release.apk
@@ -92,6 +92,20 @@ ReactTools m s
 
 - adb - connect to device **def=usb**
 
+- adb:clear **{PACKAGE_NAME}** - clear and run app
+
+  **-p** path project
+
+```bash
+ReactTools s a:c
+```
+
+or
+
+```bash
+ReactTools s a:c com.example.test
+```
+
 - adb:usb - connect to device with usb
 - adb:wifi **{ADDRESS:PORT}** - connect to device with wifi
 
@@ -99,8 +113,26 @@ ReactTools m s
 ReactTools s a:wifi 192.168.1.101
 ```
 
+- react:link - link library
+
+```bash
+ReactTools s r:l
+```
+
+- react:openDeveloper - open react developer dialog
+
+```bash
+ReactTools s r:od
+```
+
 - server - start server react-native
 
 ```bash
-ReactTools s s| ReactTools s
+ReactTools s s
+```
+
+or
+
+```bash
+ReactTools s
 ```
