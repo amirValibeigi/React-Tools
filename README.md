@@ -106,6 +106,24 @@ or
 ReactTools s a:c com.example.test
 ```
 
+- adb:getDatabaseRealm **{PACKAGE_NAME}** - pull database realm
+
+  **-fn=database.realm** file name
+
+  **-o=~/Desktop** output folder
+
+  **-p=files** database folder
+
+```bash
+ReactTools s a:gd
+```
+
+or
+
+```bash
+ReactTools s a:gd com.example.test
+```
+
 - adb:usb - connect to device with usb
 - adb:wifi **{ADDRESS:PORT}** - connect to device with wifi
 

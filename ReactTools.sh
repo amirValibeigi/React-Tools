@@ -39,10 +39,14 @@ folders=(
 
 #############def
 userCmd=()
+version="0.0.1"
 #############def
 
 
 helpMe(){
+
+  echo -e "\e[38;2;255;200;15m\n\t=================\n\t= versio: $version =\n\t================="
+
   echo -e "\n \e[38;2;250;50;250mb\e[38;2;0;150;150muild\n\t \e[38;2;250;50;250md\e[38;2;255;255;255mebug\e[38;2;150;150;150m build debug apk without sign keykey\n\t\t\e[38;2;255;200;15m ReactTools b|ReactTools b d\n\t \e[38;2;250;50;250mr\e[38;2;50;255;50melease\e[38;2;150;150;150m build release apk wit sign key\n\t\t\e[38;2;255;200;15m ReactTools b r"
 
   echo -e "\n \e[38;2;250;50;250mc\e[38;2;0;150;150mheck\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255mequire\e[38;2;150;150;150m check requirements react-native\n\t\t\e[38;2;255;200;15m ReactTools c r"
@@ -53,7 +57,9 @@ helpMe(){
 
   echo -e "\n \e[38;2;250;50;250mm\e[38;2;0;150;150make\n\t \e[38;2;250;50;250ms\e[38;2;255;255;255mrc\e[38;2;150;150;150m make folders for react-native\n\t\t\e[38;2;255;255;255m-o\e[38;2;150;150;150m path make src\n\t\t\e[38;2;255;200;15m ReactTools m s -o newProject"
 
-  echo -e "\n \e[38;2;250;50;250ms\e[38;2;0;150;150mtart\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb\e[38;2;150;150;150m connect to device \e[38;2;50;255;50mdef=usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mc\e[38;2;255;255;255mlear {PACKAGE_NAME}\e[38;2;150;150;150m clear and run app\n\t\t\e[38;2;255;255;255m-p\e[38;2;150;150;150m path folder project\n\t\t\e[38;2;255;200;15m ReactTools s a:c| ReactTools s a:c com.example.test\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mu\e[38;2;50;255;50msb\e[38;2;150;150;150m connect to device with usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mw\e[38;2;255;255;255mifi {ADDRESS:PORT}\e[38;2;150;150;150m connect to device with wifi\n\t\t\e[38;2;255;200;15m ReactTools s a:wifi 192.168.1.101\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250ml\e[38;2;255;255;255mink\e[38;2;150;150;150m link library\n\t\t\e[38;2;255;200;15m ReactTools s r:l\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250mo\e[38;2;255;255;255mpen\e[38;2;250;50;250mD\e[38;2;255;255;255meveloper\e[38;2;150;150;150m open react developer dialog\n\t\t\e[38;2;255;200;15m ReactTools s r:od\n\t \e[38;2;250;50;250ms\e[38;2;50;255;50merver\e[38;2;150;150;150m start server react-native\n\t\t\e[38;2;255;200;15m ReactTools s s| ReactTools s"
+  echo -e "\n \e[38;2;250;50;250ms\e[38;2;0;150;150mtart\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb\e[38;2;150;150;150m connect to device \e[38;2;50;255;50mdef=usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mc\e[38;2;255;255;255mlear {PACKAGE_NAME}\e[38;2;150;150;150m clear and run app\n\t\t\e[38;2;255;255;255m-p\e[38;2;150;150;150m path folder project\n\t\t\e[38;2;255;200;15m ReactTools s a:c | ReactTools s a:c com.example.test\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mg\e[38;2;255;255;255met\e[38;2;250;50;250mD\e[38;2;255;255;255matabase\e[38;2;250;50;250mR\e[38;2;255;255;255mealm {PACKAGE_NAME}\e[38;2;150;150;150m pull database realm\n\t\t\e[38;2;255;255;255m-fn=\e[38;2;50;255;50mdatabase.realm\e[38;2;150;150;150m file name\n\t\t\e[38;2;255;255;255m-o=\e[38;2;50;255;50m~/Desktop\e[38;2;150;150;150m output folder\n\t\t\e[38;2;255;255;255m-p=\e[38;2;50;255;50mfiles\e[38;2;150;150;150m database folder\n\t\t\e[38;2;255;200;15m ReactTools s a:gd | ReactTools s a:gd com.example.test\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mu\e[38;2;50;255;50msb\e[38;2;150;150;150m connect to device with usb\n\t \e[38;2;250;50;250ma\e[38;2;255;255;255mdb:\e[38;2;250;50;250mw\e[38;2;255;255;255mifi {ADDRESS:PORT}\e[38;2;150;150;150m connect to device with wifi\n\t\t\e[38;2;255;200;15m ReactTools s a:wifi 192.168.1.101"
+  
+  echo -e "\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250ml\e[38;2;255;255;255mink\e[38;2;150;150;150m link library\n\t\t\e[38;2;255;200;15m ReactTools s r:l\n\t \e[38;2;250;50;250mr\e[38;2;255;255;255meact:\e[38;2;250;50;250mo\e[38;2;255;255;255mpen\e[38;2;250;50;250mD\e[38;2;255;255;255meveloper\e[38;2;150;150;150m open react developer dialog\n\t\t\e[38;2;255;200;15m ReactTools s r:od\n\t \e[38;2;250;50;250ms\e[38;2;50;255;50merver\e[38;2;150;150;150m start server react-native\n\t\t\e[38;2;255;200;15m ReactTools s s | ReactTools s"
 }
 
 runCmd(){
@@ -155,6 +161,10 @@ startCommands(){
           startAdbClearCommands "${tmp[1]}"
         ;;
 
+        getDatabaseRealm|gd|gdr|gD|gDR)
+          startAdbGetDatabaseRealmCommands "${tmp[1]}"
+        ;;
+
         wifi|w)
           echoColorCheck 2 "connect ..."
           adb connect ${tmp[1]}
@@ -207,35 +217,59 @@ startCommands(){
 }
 
 startAdbClearCommands(){
+    local package=$(getPackageName $1)
 
-        local path="android/app/src/main/AndroidManifest.xml"
-        local package="$1"
+    if [[ $package == 0 ]]; then
+      echoColorCheck 0 "not found $path" "set -o path or set {PACKAGE_NAME}"
+      exit 0
+    fi
+    
+    echoColorCheck 2 "clear app: $package  ..."
 
-        if [[ "$userPath" != "" ]]; then
+    adb shell pm clear $package
 
-          path="$userPath/$path"
+    echoColorCheck 1 "cleard"
+    
+    echoColorCheck 2 "run app: $package/.MainActivity  ..."
+    
+    adb shell am start -n $package/.MainActivity
+    
+    echoColorCheck 1 "runnig"
+}
 
-        fi
+startAdbGetDatabaseRealmCommands(){
+  local package=$(getPackageName $1)
+  local timeNow=$(($(date +%s%N)/1000000))
+  local dFilename="database.realm"
+  local outputFilename="database_$timeNow.realm"
+  local output=~/Desktop
+  local path="files"
+  
 
+  if [[ $userOutput != "" ]]; then
+      output=$userOutput
+  fi
+  
+  if [[ $userFileName != "" ]]; then
+      dFilename=$userFileName
+  fi
+  
+  if [[ $userPath != "" ]]; then
+      path=$userPath
+  fi
 
-        if [ -f "$path" ]; then
+  if [[ $package == 0 ]]; then
+    echoColorCheck 0 "not found $path" "set -o path or set {PACKAGE_NAME}"
+    exit 0
+  fi
 
-          [[ "$package" == "" ]] && package=$(head $path | egrep -oh 'package=\"[_.A-Za-z\.0-9]*"'  | cut -f 2 -d "\"")
-          
-          echoColorCheck 2 "clear app: $package  ..."
+   adb shell "rm /sdcard/$dFilename"
 
-          adb shell pm clear $package
+  adb shell run-as $package "cp $path/$dFilename /sdcard/$dFilename"
+  sleep 2
 
-          echoColorCheck 1 "cleard"
-          
-          echoColorCheck 2 "run app: $package/.MainActivity  ..."
-          
-          adb shell am start -n $package/.MainActivity
-          
-          echoColorCheck 1 "runnig"
-        else
-          echoColorCheck 0 "not found $path" "set -o path"
-        fi
+  adb pull "///sdcard/$dFilename" $output/$outputFilename
+  sleep 2
 }
 
 buildCommands(){
@@ -395,6 +429,30 @@ echoColorCheck(){
       echo -e "\e[38;2;150;0;0m $2 ❌ \e[38;2;255;200;15m =>\t$3"
   fi
 }
+
+getPackageName(){
+  local path="android/app/src/main/AndroidManifest.xml"
+  local package="$1"
+
+  if [[ "$userPath" != "" ]]; then
+
+    path="$userPath/$path"
+
+  fi
+
+  if [[ "$package" == "" ]]; then
+    if [ -f "$path" ]; then
+
+      [[ "$package" == "" ]] && package=$(head $path | egrep -oh 'package=\"[_.A-Za-z\.0-9]*"'  | cut -f 2 -d "\"")
+      
+    else
+      echo 0
+      exit 0
+    fi
+  fi
+
+  echo $package
+}
     
 while test $# -gt 0; do
   case "$1" in
@@ -418,6 +476,12 @@ while test $# -gt 0; do
     -p|--path)
       shift
       userPath=$1
+      shift
+      ;;
+
+      -fn|--file-name|--fileName)
+      shift
+      userFileName=$1
       shift
       ;;
       
